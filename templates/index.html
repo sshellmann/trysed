@@ -12,7 +12,7 @@
                 <h1>Try Sed</h1>
             </div>
             <div id="main">
-                <p id="introduction">Welcome to Try Sed. This tutorial can be used as a first time introduction to sed or as a refresher course. To get started, enter "start" into the input box.</p>
+                <p id="dialog">{{ dialog }}</p>
                 <table class="div_center" cellspacing="10">
                     <tbody>
                         <tr>
@@ -29,6 +29,8 @@
                     <input id="user_input" type="text" name="input"/>
                 </div>
                 <div id="input_error"><p>&nbsp;</p></div>
+                <input id="reset_step" type="button" value="Reset step"/>
+                <input id="get_step" type="button" value="Get step"/>
             </div>
         </div>
     </body>
