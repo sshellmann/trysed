@@ -17,6 +17,12 @@ steps = [
         "entry": ["cat dog", "cat ./dog"],
         "result": "cats and dogs until the end of time",
     },
+    {
+        "name": "first_sed",
+        "text": 'Now it\'s time for your first usage of sed.',
+        "entry": ['sed "s/cat/bird/" dog'],
+        "result": "birds and dogs until the end of time",
+    },
 ]
 
 class Progress(object):

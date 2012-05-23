@@ -27,9 +27,7 @@ def submit():
     entry_check = {"success": False}
     result_check = {"success": False}
     if "progress" not in session:
-        print "new session"
         session["progress"] = Progress()
-    print session["progress"].get_step()
     if command:
         progress = session["progress"]
         entry_check = progress.check_entry(command)
@@ -46,8 +44,8 @@ def submit():
     else:
         response["error"] = "Must enter a command."
     if entry_check["success"] or result_check["success"]:
-        print "next step"
         progress.next_step()
+        session.modified = True
     dialog = progress.get_dialog()
     response["dialog"] = dialog
     response = json.dumps(response)
@@ -55,13 +53,14 @@ def submit():
 
 @app.route('/reset_step', methods=['POST'])
 def reset_step():
-    session["progress"] = Progress()
-    return "success"
+    reset = Progress()
+    session["progress"] = reset
+    return str(reset.get_step()[0]["text"])
 
 @app.route('/get_step', methods=['POST'])
-def reset_step():
+def get_step():
     step = session["progress"].get_step()
     return str(step)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='0.0.0.0', port=9980, debug=True)

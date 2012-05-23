@@ -14,10 +14,12 @@ $(document).ready(function() {
                     handle_error();
                 },
                 success: function(data){
+                    last = data;
                     if (!data["success"])
                         handle_error(data["error"]);
                     else {
                         clear_error();
+                        $("#user_input").val("");
                         $(".main_panel:first textarea").val(data["result"]);
                         if (data["dialog"]) {
                             $("#dialog").html(data["dialog"]);
@@ -32,6 +34,10 @@ $(document).ready(function() {
         $.ajax({
             url: "/reset_step",
             type: "POST",
+            success: function(data) {
+                console.debug(data);
+                $("#dialog").html(data);
+            }
         });
     });
 
@@ -41,6 +47,7 @@ $(document).ready(function() {
             type: "POST",
             success: function(data){
                 console.debug(data);
+                $("#step_div").html(data);
             }
         });
     });
